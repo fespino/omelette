@@ -8,6 +8,8 @@ license = "MIT"
 [tool.poetry.dependencies]
 python = "^3.9"
 starlette = "^0.14.2"
+Jinja2 = "^3.0.0"
+uvicorn = {version = "^0.13.4", extras = ["standard"]}
 
 [tool.poetry.dev-dependencies]
 pytest = "^6.2.4"
@@ -18,6 +20,7 @@ autoflake = "^1.4"
 mypy = "^0.812"
 flake8-bugbear = "^21.4.3"
 flake8-pie = "^0.12.0"
+ipython = "^7.23.1"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
