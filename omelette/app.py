@@ -2,14 +2,12 @@ import asyncio
 import logging
 import typing
 
+from jinja2 import Template
 from starlette.applications import Starlette
+from starlette.endpoints import WebSocketEndpoint
 from starlette.requests import Request
 from starlette.responses import HTMLResponse
-from starlette.endpoints import WebSocketEndpoint
-from jinja2 import Template
 from starlette.websockets import WebSocket
-
-
 
 template = """
 <!doctype html>
@@ -51,9 +49,11 @@ template = """
 app = Starlette()
 logger = logging.getLogger()
 
+
 @app.route("/")
 async def homepage(_: Request) -> HTMLResponse:
     return HTMLResponse(Template(template).render())
+
 
 @app.websocket_route("/om")
 class WebSocketTicks(WebSocketEndpoint):
@@ -64,7 +64,7 @@ class WebSocketTicks(WebSocketEndpoint):
 
     async def on_disconnect(self, _: WebSocket, close_code: int) -> None:
         self.ticker_task.cancel()
-        logger.debug(f"disconnect: {close_code}")
+        logger.debug("disconnect: %s", close_code)
 
     async def on_receive(self, websocket: WebSocket, data: typing.Any) -> None:
         await websocket.send_json(dict(msg=data))
@@ -77,6 +77,8 @@ class WebSocketTicks(WebSocketEndpoint):
             counter += 1
             await asyncio.sleep(1)
 
-if __name__== "__main__":
+
+if __name__ == "__main__":
     import uvicorn
-    uvicorn.run(app, log_level='debug')
+
+    uvicorn.run(app, log_level="debug")

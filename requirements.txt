@@ -1,0 +1,26 @@
+# App
+Jinja2
+starlette
+uvicorn
+
+# Testing
+autoflake
+black==21.5b1
+coverage
+flake8
+flake8-bugbear
+flake8-pie
+isort
+mypy
+pytest
+pytest-asyncio
+pytest-cov
+
+# Documentation
+mkdocs
+mkdocs-material
+mkautodoc
+
+# Packaging
+twine
+wheel
